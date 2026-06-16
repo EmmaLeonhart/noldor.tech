@@ -5,29 +5,64 @@ Finished work is deleted from here and recorded in `devlog.md` (dated entry) +
 `git log`, in the same commit. Do not leave checkmarks or "done" markers — if an
 item is still here, it is not done. See `CLAUDE.md` § "Workflow Rules".
 
-Spec for the current work: `docs/superpowers/specs/2026-06-16-noldor-logo-site-design.md`.
-
-> Running interactively with the user present on a bounded task, so the
-> three-cron autonomous playbook is **not** started this session.
-
----
-
-## Active
-
-_First-pass logo + landing site is done and deployed. Next work pulls from
-`todo.md` (Yantra style/redirects, fuller site) — most of it is blocked on user
-input (Yantra repo URL, the page-list/sitemap), so the queue is intentionally
-empty pending those._
+**Three-cron playbook is RUNNING this session** (work-loop `3 * * * *`,
+auto-flush `15 * * * *`, status-report `42 * * * *`). The pinned tail keeps them
+alive and signs off. Work items run top to bottom.
 
 ---
 
-## Always last
+## Active — Visual identity + content (decomposed from `data_lake/notes.md`)
 
-A. **Run an end-of-session summary** of everything that happened this session.
+1. **Fix "analogue" → "analog" across the site.** User correction: it's *analog*,
+   not *analogue*. Update `index.html` (meta description, OG description,
+   tagline), `README.md`, and any other shipped copy / docs. Redeploy and
+   verify the live site shows "analog".
+
+2. **Vendor Yantra's canonical `identity.css`.** Copy
+   `EmmaLeonhart/Yantra:site/identity.css` — the explicitly *shared* visual
+   identity (dark default + light toggle, periwinkle `--accent`, Instrument
+   Serif / Inter / JetBrains Mono, a `--sutra` gold accent, the canonical `.btn`
+   system) — into this repo (e.g. `identity.css` at root) byte-for-byte, so
+   Noldor genuinely shares the identity with Sutra/Yantra (per notes.md: "common
+   visual identity with the Sutra site taken from the Yantra site"). Also pull
+   `site/celestial.css` if its base primitives are needed.
+
+3. **Restyle `index.html` to the shared identity.** Link `identity.css`; rebuild
+   the landing on its palette/type/tokens (dark default). Keep the tengwar
+   wordmark (it uses `currentColor`, so it adapts to theme). Remove now-duplicated
+   declarations from `styles.css` (page-specific layout only — do NOT re-declare
+   `.btn` or palette locally; that's what made the sister sites diverge).
+
+4. **Add the dark/light theme toggle + web fonts.** Wire the toggle (persist to
+   `localStorage`, default dark) using the MkDocs-Material weather-sunny /
+   weather-night icons that match the Sutra docs + Yantra site. Ensure Instrument
+   Serif / Inter / JetBrains Mono actually load.
+
+5. **Expand the landing into practical product sections.** Tight, practical
+   sections (not lore): what Noldor does (vector symbolic architecture for
+   analog hardware + edge AI), the Sutra connection (link to sutra.noldor.tech),
+   and a contact line. Pull factual cues from Sutra docs
+   (`what-is-sutra.md`, `vision.md`). Keep it on-brand and short.
+
+6. **[needs-user] Alt logo mark `data_lake/Noldor logo.png`.** Shows the first
+   two tengwar ("Ñol"). Decide with the user whether it replaces/augments the
+   current single-tengwa monogram + favicon. Do NOT swap silently — flagged for
+   the user; skip autonomously until they choose.
+
+---
+
+## Always last — keep the crons alive and sign off
+
+A. **Ensure the three crons are running** — work-loop (`3 * * * *`), auto-flush
+   (`15 * * * *`), status-report (`42 * * * *`). Start/restart if a planning
+   burst or queue re-fill killed them.
+B. **Run the status-report action once more, independently** — an end-of-session
+   summary of everything that happened this session.
 
 ---
 
 ## Pointers
 
-- Long-horizon backlog: `todo.md` (create when the first pass is done).
-- Completed work: `devlog.md`. Narrative history: `git log`.
+- Long-horizon backlog: `todo.md`. Completed work: `devlog.md`. History: `git log`.
+- Done (parallel session): Yantra→Noldor redirect (PR #1), `data_lake/yantra-sitemap.*`,
+  3pm-Pacific cutover cron. Don't redo these.
