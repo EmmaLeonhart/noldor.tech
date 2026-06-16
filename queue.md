@@ -13,10 +13,7 @@ alive and signs off. Work items run top to bottom.
 
 ## Active
 
-_Visual-identity + content pass complete. notes.md is fully decomposed and
-shipped. Next work pulls from `todo.md` (keep identity in sync, grow the site).
-Possible polish noted in todo: a dual-tone favicon (the mark is dark, so it's
-low-contrast on dark browser chrome)._
+_Empty. Next work pulls from `todo.md`._
 
 ---
 

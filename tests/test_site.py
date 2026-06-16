@@ -74,6 +74,20 @@ def test_index_has_theme_toggle_dark_default():
     assert 'id="theme-toggle"' in html  # toggle control present
 
 
+def test_favicon_svg_is_theme_aware():
+    svg = (ASSETS / "favicon.svg").read_text(encoding="utf-8")
+    assert "@media (prefers-color-scheme: dark)" in svg, "favicon.svg not theme-aware"
+
+
+def test_app_icons_are_opaque():
+    """Raster app icons must be fully opaque (read on any bg; iOS-safe)."""
+    from PIL import Image
+    for name in ["favicon-32.png", "apple-touch-icon.png", "icon-512.png"]:
+        im = Image.open(ASSETS / name).convert("RGBA")
+        alpha = im.getchannel("A").getextrema()
+        assert alpha[0] == 255, f"{name} has transparency (min alpha {alpha[0]})"
+
+
 def test_index_html_has_tagline():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "Vector symbolic architecture" in html

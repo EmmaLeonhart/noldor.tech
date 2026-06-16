@@ -145,3 +145,18 @@ User firmly chose the two-tengwa mark over the single-tengwa monogram.
 - Noted polish for later (`todo.md`): the mark is dark `#2b2b2b`, so it's
   low-contrast on dark browser chrome — a dual-tone / theme-aware favicon would
   fix it.
+
+## 2026-06-16 — Theme-aware favicon + opaque app icons
+
+Work-loop item pulled from `todo.md`.
+
+- **`favicon.svg` is now theme-aware:** an embedded `<style>` with
+  `@media (prefers-color-scheme: dark)` flips the `currentColor` glyph — dark on
+  light chrome, light on dark chrome. Verified both schemes render correctly in
+  Chromium.
+- **App icons are opaque:** `favicon-32.png` / `apple-touch-icon.png` /
+  `icon-512.png` now render the light mark on an opaque deep-navy square
+  (`#0c0c14`, `--bg-soft`) with an inset margin — readable on any background and
+  iOS-safe (no black-filled transparency).
+- **Tests:** added `test_favicon_svg_is_theme_aware` + `test_app_icons_are_opaque`.
+  **13 passing.**
