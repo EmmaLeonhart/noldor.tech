@@ -43,3 +43,21 @@ Quenya-mode render).
   re-run it).
 - Open question for the user: monogram currently includes the o-vowel curl; a
   bare-*ñoldo* variant is a quick swap if preferred.
+
+## 2026-06-16 — Landing page + tests + CI
+
+- **`index.html` + `styles.css`:** minimal one-screen landing — inlined tengwar
+  wordmark (so `currentColor` follows the theme), "NOLDOR TECHNOLOGIES"
+  letter-spaced, tagline *"Vector symbolic architecture for analogue hardware
+  and edge AI."*, accent hairline, footer. Light + dark via
+  `prefers-color-scheme`; responsive via `clamp()`; reduced-motion honored.
+  Verified rendering in both themes (Playwright screenshots). Tone kept
+  practical per `data_lake/notes.md` (no lore).
+- **Favicons + OG tags** wired up; `CNAME` = `noldor.tech`.
+- **Tests:** `tests/test_site.py` — SVGs well-formed with non-empty paths,
+  wordmark uses `currentColor`, favicons are real PNGs, `index.html` references
+  all assets + tagline, `CNAME` correct, no "Yantra" in shipped files. 9 passing.
+- **CI:** `.github/workflows/ci.yml` (pytest on push/PR). **Deploy:**
+  `.github/workflows/deploy.yml` (assembles a clean `_site/`, `upload-pages-artifact`
+  + `deploy-pages` on `main`).
+- README rewritten to describe the project.
