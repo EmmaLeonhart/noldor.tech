@@ -61,3 +61,20 @@ Quenya-mode render).
   `.github/workflows/deploy.yml` (assembles a clean `_site/`, `upload-pages-artifact`
   + `deploy-pages` on `main`).
 - README rewritten to describe the project.
+
+## 2026-06-16 — Deployed: public repo + GitHub Pages + custom domain
+
+- Created public repo **EmmaLeonhart/noldor.tech** and pushed `main`.
+- Enabled Pages (build_type=workflow); made the deploy workflow self-enabling
+  (`configure-pages` `enablement: true`).
+- **CI green; Pages deploy green.** Site live at
+  `https://emmaleonhart.github.io/noldor.tech/` (HTTP 200, correct content).
+- Custom domain: the apex DNS for `noldor.tech` already points at GitHub Pages
+  (185.199.108–111.153, set up by the user). Registered the domain on the repo
+  Pages config (`cname=noldor.tech`); **`http://noldor.tech/` serves HTTP 200**.
+  HTTPS cert is provisioning (automatic); enable "Enforce HTTPS" once ready.
+- Created `todo.md` with the long-horizon items from `data_lake/notes.md`
+  (Yantra style mining, Yantra→noldor redirects / page-list handling, the
+  3pm-Pacific data-lake cron, monogram variant). Most are blocked on user input.
+
+**First-pass milestone:** Noldor Technologies logo + landing site is live.
