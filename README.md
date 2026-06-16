@@ -14,7 +14,7 @@ styles.css              # styling, light + dark via prefers-color-scheme
 CNAME                   # custom domain (noldor.tech)
 assets/
   noldor-wordmark.svg   # full "Ñoldor" tengwar wordmark (Quenya mode)
-  noldor-letter.svg     # first tengwa (archaic ñ) — monogram / favicon source
+  noldor-mark.svg       # brand mark — first two tengwar "Ñol" — favicon source
   favicon.svg, favicon-32.png, apple-touch-icon.png, icon-512.png
 tools/build_logos.py    # regenerates the logo assets from data_lake/Noldor.png
 tests/                  # pytest checks for the assets + page
@@ -26,8 +26,9 @@ data_lake/              # source material (not served on the site)
 The wordmark is **Ñoldor** written in Tengwar (Quenya mode), matching the
 [tecendil](https://www.tecendil.com/?q=%C3%91oldor&mode=quenya) rendering. The
 SVGs are vector outlines (no font file shipped); the wordmark uses
-`fill="currentColor"` so it follows the page theme. The monogram is the first
-tengwa — the archaic *ñ* (*ñoldo*).
+`fill="currentColor"` so it follows the page theme. The brand mark
+(`noldor-mark.svg`, the favicon source) is the first two tengwar — *Ñol* (the
+archaic *ñ* / *ñoldo* + *lambe*).
 
 To regenerate the assets from the source PNG (needs `potrace`, Pillow, cairosvg):
 

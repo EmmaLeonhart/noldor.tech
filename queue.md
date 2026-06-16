@@ -11,12 +11,12 @@ alive and signs off. Work items run top to bottom.
 
 ---
 
-## Active — Visual identity + content (decomposed from `data_lake/notes.md`)
+## Active
 
-6. **[needs-user] Alt logo mark `data_lake/Noldor logo.png`.** Shows the first
-   two tengwar ("Ñol"). Decide with the user whether it replaces/augments the
-   current single-tengwa monogram + favicon. Do NOT swap silently — flagged for
-   the user; skip autonomously until they choose.
+_Visual-identity + content pass complete. notes.md is fully decomposed and
+shipped. Next work pulls from `todo.md` (keep identity in sync, grow the site).
+Possible polish noted in todo: a dual-tone favicon (the mark is dark, so it's
+low-contrast on dark browser chrome)._
 
 ---
 
