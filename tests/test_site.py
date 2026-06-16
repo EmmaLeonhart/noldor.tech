@@ -54,8 +54,24 @@ def test_index_html_references_assets():
     assert "assets/favicon.svg" in html
     assert "assets/favicon-32.png" in html
     assert "assets/apple-touch-icon.png" in html
-    # links to its stylesheet
+    # links its stylesheets, including the shared identity layers
     assert 'href="styles.css"' in html
+    assert 'href="identity.css"' in html
+    assert 'href="celestial.css"' in html
+
+
+def test_shared_identity_files_present():
+    """The vendored canonical identity + celestial layers must ship."""
+    for name in ["identity.css", "celestial.css"]:
+        p = ROOT / name
+        assert p.exists(), f"missing {name}"
+        assert p.stat().st_size > 1000, f"{name} too small"
+
+
+def test_index_has_theme_toggle_dark_default():
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert 'data-theme="dark"' in html  # dark default on <html>
+    assert 'id="theme-toggle"' in html  # toggle control present
 
 
 def test_index_html_has_tagline():

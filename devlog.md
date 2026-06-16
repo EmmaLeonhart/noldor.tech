@@ -104,3 +104,27 @@ Quenya-mode render).
   Yantra + Sutra) into the repo root, byte-for-byte. This is the basis for the
   "common visual identity with Sutra" the user asked for; the landing restyle
   links them next.
+
+## 2026-06-16 — Landing rebuilt on the shared identity (dark, celestial, sections)
+
+Restyled `index.html` onto the shared identity and expanded it from a single
+hero into a practical one-pager — Noldor now visually matches the Sutra/Yantra
+family.
+
+- **Identity wiring:** links `identity.css` + `celestial.css` (+ page-only
+  `styles.css`), Google Fonts (Inter / Instrument Serif / JetBrains Mono),
+  `data-theme="dark"` default with a pre-paint script, and the shared
+  weather-sunny/night **theme toggle** (persists to `localStorage`). The tengwar
+  wordmark is the hero, `currentColor`-driven with a periwinkle drop-shadow glow
+  in dark; verified both themes + the toggle via Playwright.
+- **`styles.css` reduced to page layout only** — no local palette/`.btn`
+  redeclaration (the thing that makes sister sites diverge).
+- **Practical sections** (not lore): *What we build* (VSA for analog hardware +
+  edge AI), *Built on Sutra* (links live `sutra.noldor.tech`), *Get in touch*
+  (GitHub + Sutra links). Dropped an invented `hello@` email rather than ship an
+  unverified inbox — contact is via GitHub for now (a real address can be wired
+  up later).
+- **Tests:** added checks for identity/celestial linkage + presence and the
+  dark-default toggle; `test_no_yantra_mention` caught a "Yantra" leak in an HTML
+  comment (the site must not surface the old name) — scrubbed. **11 passing.**
+- Deploy workflow now ships `identity.css` + `celestial.css`.
