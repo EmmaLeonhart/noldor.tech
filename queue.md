@@ -14,17 +14,10 @@ Spec for the current work: `docs/superpowers/specs/2026-06-16-noldor-logo-site-d
 
 ## Active — Noldor logo + landing site (first pass)
 
-4. **Build `index.html` + CSS.** Centered wordmark, one-line tagline (*vector
-   symbolic architecture for analogue / edge-AI hardware*), letter favicon,
-   near-black logo on light bg, responsive. No framework.
-
-5. **Tests + CI.** `pytest`: SVGs are well-formed XML with >=1 non-empty path;
-   `index.html` references wordmark + favicon; `CNAME` == `noldor.tech`. Add
-   `.github/workflows/ci.yml` running the suite on push/PR.
-
-6. **GitHub Pages via Actions + custom domain.** Add `CNAME` file, add a Pages
-   deploy workflow (`actions/upload-pages-artifact` + `actions/deploy-pages`),
-   create the public repo **noldor.tech**, push, confirm CI + deploy are green.
+6. **GitHub Pages via Actions + custom domain.** Create the public repo
+   **noldor.tech**, push `main`, confirm CI + the Pages deploy workflow are
+   green, and that the custom domain serves. (Site files, `CNAME`, and both
+   workflows are already committed.)
 
 ---
 
