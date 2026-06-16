@@ -1,7 +1,7 @@
 # Noldor Technologies — noldor.tech
 
 The public website for **Noldor Technologies**, a company building **vector
-symbolic architecture for analogue hardware and edge AI**.
+symbolic architecture for analog hardware and edge AI**.
 
 The site is a static page deployed to **GitHub Pages** at
 [noldor.tech](https://noldor.tech) via GitHub Actions.
