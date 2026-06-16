@@ -98,3 +98,9 @@ Quenya-mode render).
 - **Fix:** "analogue" → "**analog**" (user correction) in `index.html`
   (meta description, OG description, tagline) and `README.md`. Shipped files now
   contain no "analogue"; 9 tests still pass.
+- **Vendored the shared visual identity:** copied Yantra's `site/identity.css`
+  (the canonical shared file across emmaleonhart.com + sister sites) and
+  `site/celestial.css` (the periwinkle→cyan→violet starfield/glow layer used by
+  Yantra + Sutra) into the repo root, byte-for-byte. This is the basis for the
+  "common visual identity with Sutra" the user asked for; the landing restyle
+  links them next.

@@ -13,15 +13,6 @@ alive and signs off. Work items run top to bottom.
 
 ## Active — Visual identity + content (decomposed from `data_lake/notes.md`)
 
-2. **Vendor Yantra's canonical `identity.css`.** Copy
-   `EmmaLeonhart/Yantra:site/identity.css` — the explicitly *shared* visual
-   identity (dark default + light toggle, periwinkle `--accent`, Instrument
-   Serif / Inter / JetBrains Mono, a `--sutra` gold accent, the canonical `.btn`
-   system) — into this repo (e.g. `identity.css` at root) byte-for-byte, so
-   Noldor genuinely shares the identity with Sutra/Yantra (per notes.md: "common
-   visual identity with the Sutra site taken from the Yantra site"). Also pull
-   `site/celestial.css` if its base primitives are needed.
-
 3. **Restyle `index.html` to the shared identity.** Link `identity.css`; rebuild
    the landing on its palette/type/tokens (dark default). Keep the tengwar
    wordmark (it uses `currentColor`, so it adapts to theme). Remove now-duplicated
