@@ -13,3 +13,5 @@ Set up a cron job that will check the data lake at 3 p.m. Pacific time. It'll ch
 
 
 I also want you to specifically go through the Yantra site and the stuff that's present on it to find the general style that I've been going for and implement it on this site and stuff. 
+
+I want the Noldor site to have a common visual identity with the Sutra site taken from the Yantra site.
