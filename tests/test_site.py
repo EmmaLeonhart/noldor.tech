@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 SVG_NS = "{http://www.w3.org/2000/svg}"
 
-SVG_FILES = ["noldor-wordmark.svg", "noldor-letter.svg", "favicon.svg"]
+SVG_FILES = ["noldor-wordmark.svg", "noldor-mark.svg", "favicon.svg"]
 
 
 @pytest.mark.parametrize("name", SVG_FILES)

@@ -17,6 +17,7 @@ Run:  python tools/build_logos.py
 """
 from __future__ import annotations
 
+import io
 import os
 import re
 import subprocess
@@ -53,12 +54,12 @@ def ink_bbox(mask: np.ndarray) -> tuple[int, int, int, int]:
     return xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
 
 
-def first_glyph_xrange(mask: np.ndarray, gap: int = 6) -> tuple[int, int]:
-    """X-range of the leftmost tengwa (ñoldo + its o-tehta).
+def mark_xrange(mask: np.ndarray, gap: int = 6) -> tuple[int, int]:
+    """X-range of the brand mark — the first two tengwar, "Ñol" (ñoldo + lambe).
 
-    The first column-run actually contains two touching tengwar (ñoldo and
-    lambe) with no blank column between them, so we split the run at its
-    interior ink minimum — the thin connecting stroke between the two glyphs.
+    The leftmost column-run holds two touching tengwar (ñoldo + its o-tehta, and
+    lambe) with no blank column between them; the next blank gap ends the run.
+    The whole run is the chosen mark.
     """
     cols = np.where(mask.any(axis=0))[0]
     start = prev = cols[0]
@@ -68,12 +69,7 @@ def first_glyph_xrange(mask: np.ndarray, gap: int = 6) -> tuple[int, int]:
             run_end = prev + 1
             break
         prev = c
-    x0 = int(start)
-    counts = mask.sum(axis=0)
-    w = run_end - x0
-    lo, hi = x0 + int(0.35 * w), x0 + int(0.85 * w)
-    split = lo + int(np.argmin(counts[lo:hi]))
-    return x0, split + 1
+    return int(start), int(run_end)
 
 
 def crop_to_pbm(gray: np.ndarray, box: tuple[int, int, int, int], out_pbm: Path):
@@ -129,29 +125,38 @@ def main():
         clean_svg(word_raw, "Ñoldor"), encoding="utf-8"
     )
 
-    # First-letter monogram (leftmost tengwa cluster: archaic ñ / ñoldo + o-curl)
-    fx0, fx1 = first_glyph_xrange(mask)
-    sub = mask[:, fx0:fx1]
+    # Brand mark — the first two tengwar, "Ñol" (ñoldo + lambe)
+    mx0, mx1 = mark_xrange(mask)
+    sub = mask[:, mx0:mx1]
     ys = np.where(sub.any(axis=1))[0]
-    letter_box = (fx0, ys.min(), fx1, ys.max() + 1)
-    letter_pbm = WORK / "_letter.pbm"; letter_raw = WORK / "_letter_raw.svg"
-    crop_to_pbm(gray, letter_box, letter_pbm)
-    run_potrace(letter_pbm, letter_raw)
-    (ASSETS / "noldor-letter.svg").write_text(
-        clean_svg(letter_raw, "Ñ"), encoding="utf-8"
+    mark_box = (mx0, ys.min(), mx1, ys.max() + 1)
+    mark_pbm = WORK / "_mark.pbm"; mark_raw = WORK / "_mark_raw.svg"
+    crop_to_pbm(gray, mark_box, mark_pbm)
+    run_potrace(mark_pbm, mark_raw)
+    (ASSETS / "noldor-mark.svg").write_text(
+        clean_svg(mark_raw, "Ñol"), encoding="utf-8"
     )
 
-    # Favicons from the letter mark (dark glyph on transparent)
+    # Drop the older single-tengwa monogram if present (superseded by the mark).
+    (ASSETS / "noldor-letter.svg").unlink(missing_ok=True)
+
+    # Favicons from the brand mark. The mark is wider than tall, so render at
+    # natural aspect and letterbox onto a square transparent canvas (no squash).
     import cairosvg
-    letter_svg = (ASSETS / "noldor-letter.svg").read_text(encoding="utf-8")
-    # Recolor currentColor -> dark for standalone raster favicons
-    raster_svg = letter_svg.replace('fill="currentColor"', 'fill="#2b2b2b"')
+    mark_svg = (ASSETS / "noldor-mark.svg").read_text(encoding="utf-8")
+    raster_svg = mark_svg.replace('fill="currentColor"', 'fill="#2b2b2b"')
     for size, name in [(32, "favicon-32.png"), (180, "apple-touch-icon.png"),
                        (512, "icon-512.png")]:
-        cairosvg.svg2png(
-            bytestring=raster_svg.encode(), write_to=str(ASSETS / name),
-            output_width=size, output_height=size,
-        )
+        png = cairosvg.svg2png(bytestring=raster_svg.encode(),
+                               output_width=size * 2)  # 2x then fit, for crispness
+        glyph = Image.open(io.BytesIO(png)).convert("RGBA")
+        scale = min(size / glyph.width, size / glyph.height)
+        glyph = glyph.resize((max(1, round(glyph.width * scale)),
+                              max(1, round(glyph.height * scale))), Image.LANCZOS)
+        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        canvas.alpha_composite(glyph, ((size - glyph.width) // 2,
+                                       (size - glyph.height) // 2))
+        canvas.save(ASSETS / name)
     # SVG favicon (recolored dark so it shows on light tabs)
     (ASSETS / "favicon.svg").write_text(raster_svg, encoding="utf-8")
 

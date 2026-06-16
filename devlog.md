@@ -128,3 +128,20 @@ family.
   dark-default toggle; `test_no_yantra_mention` caught a "Yantra" leak in an HTML
   comment (the site must not surface the old name) — scrubbed. **11 passing.**
 - Deploy workflow now ships `identity.css` + `celestial.css`.
+
+## 2026-06-16 — Brand mark switched to "Ñol" (Option B, user's firm choice)
+
+User firmly chose the two-tengwa mark over the single-tengwa monogram.
+
+- Produced it as a **crisp vector** (not the low-res `data_lake/Noldor logo.png`):
+  `tools/build_logos.py` now cuts the first *two* tengwar — *Ñol* (ñoldo + lambe)
+  — straight from the traced wordmark → `assets/noldor-mark.svg`. Removed the
+  superseded `noldor-letter.svg`.
+- **Favicons** regenerated from the mark; since it's wider than tall, they're
+  letterboxed onto a square transparent canvas (no squash) at 2× then fit for
+  crispness. `favicon.svg` / `favicon-32.png` / `apple-touch-icon.png` /
+  `icon-512.png` updated.
+- Updated README + tests (`noldor-mark.svg`). **11 passing.**
+- Noted polish for later (`todo.md`): the mark is dark `#2b2b2b`, so it's
+  low-contrast on dark browser chrome — a dual-tone / theme-aware favicon would
+  fix it.
