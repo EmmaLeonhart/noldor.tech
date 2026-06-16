@@ -25,3 +25,8 @@ Thumbs.db
 # Environment
 .env
 .env.local
+
+# Working fonts (outlines are shipped in assets/, not the font files)
+.fonts/
+# Saved tecendil page (never commit)
+tecendil_page*
