@@ -13,7 +13,9 @@ alive and signs off. Work items run top to bottom.
 
 ## Active
 
-_Empty. Next work pulls from `todo.md`._
+_Empty. Next work pulls from `todo.md` (mark-in-topbar is a taste decision left
+for the user; grow-the-site needs product direction; exact-Telcontar is blocked
+on tooling)._
 
 ---
 

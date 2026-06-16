@@ -160,3 +160,17 @@ Work-loop item pulled from `todo.md`.
   iOS-safe (no black-filled transparency).
 - **Tests:** added `test_favicon_svg_is_theme_aware` + `test_app_icons_are_opaque`.
   **13 passing.**
+
+## 2026-06-16 — Open Graph / social-card image (1200×630)
+
+Work-loop item pulled from `todo.md`.
+
+- `og:image` previously pointed at the 512² square icon; social platforms want a
+  1200×630 landscape card. `tools/build_logos.py` now renders
+  `assets/og-image.png` — the light wordmark on the brand navy gradient with a
+  periwinkle glow, "NOLDOR TECHNOLOGIES" (letter-spaced) + the tagline.
+- Wired `og:image` (+ width/height) and a full `twitter:card`
+  (`summary_large_image`, title, description, image) into `index.html`.
+- Test `test_og_image_is_landscape_card` (exists, 1200×630, opaque, referenced).
+  **14 passing.** Removed the now-done theme-aware-favicon / OG-bg note from
+  `todo.md`.

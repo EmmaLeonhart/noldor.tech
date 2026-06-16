@@ -111,6 +111,77 @@ def clean_svg(raw_svg: Path, title: str) -> str:
     )
 
 
+def _font(names, size):
+    """First available TrueType font from `names`, falling back to default."""
+    from PIL import ImageFont
+    for n in names:
+        for path in (n, f"C:/Windows/Fonts/{n}"):
+            try:
+                return ImageFont.truetype(path, size)
+            except OSError:
+                continue
+    return ImageFont.load_default()
+
+
+def _draw_tracked(draw, xy_center_y, text, font, fill, tracking, width):
+    """Draw horizontally-centered text with letter-spacing (tracking, px)."""
+    widths = [draw.textlength(ch, font=font) for ch in text]
+    total = sum(widths) + tracking * (len(text) - 1)
+    x = (width - total) / 2
+    for ch, w in zip(text, widths):
+        draw.text((x, xy_center_y), ch, font=font, fill=fill)
+        x += w + tracking
+
+
+def build_og_image(light_svg: str, cairosvg):
+    """Render assets/og-image.png — a 1200x630 social card: light wordmark on the
+    brand navy with a periwinkle glow, company name, and tagline."""
+    from PIL import ImageDraw, ImageFilter
+    W, H = 1200, 630
+    top, bot = (7, 7, 12), (12, 12, 22)
+    img = Image.new("RGB", (W, H), top)
+    # vertical gradient
+    px = img.load()
+    for y in range(H):
+        t = y / (H - 1)
+        px_row = tuple(round(top[i] + (bot[i] - top[i]) * t) for i in range(3))
+        for x in range(W):
+            px[x, y] = px_row
+    # periwinkle glow, top-centre
+    glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    gd.ellipse([W / 2 - 430, -260, W / 2 + 430, 360], fill=(139, 155, 255, 90))
+    glow = glow.filter(ImageFilter.GaussianBlur(120))
+    img = Image.alpha_composite(img.convert("RGBA"), glow)
+
+    # wordmark (light), centred upper
+    wm_svg = ASSETS_wordmark_light()
+    png = cairosvg.svg2png(bytestring=wm_svg.encode(), output_width=1280)
+    wm = Image.open(io.BytesIO(png)).convert("RGBA")
+    target_w = 580
+    scale = target_w / wm.width
+    wm = wm.resize((target_w, max(1, round(wm.height * scale))), Image.LANCZOS)
+    wm_y = 108
+    img.alpha_composite(wm, ((W - wm.width) // 2, wm_y))
+
+    d = ImageDraw.Draw(img)
+    name_f = _font(["arialbd.ttf", "Arial.ttf"], 30)
+    tag_f = _font(["arial.ttf", "Arial.ttf"], 30)
+    _draw_tracked(d, wm_y + wm.height + 36, "NOLDOR TECHNOLOGIES",
+                  name_f, (176, 188, 255, 255), 8, W)
+    tagline = "Vector symbolic architecture for analog hardware and edge AI"
+    tw = d.textlength(tagline, font=tag_f)
+    d.text(((W - tw) / 2, wm_y + wm.height + 96), tagline, font=tag_f,
+           fill=(140, 140, 170, 255))
+
+    img.convert("RGB").save(ASSETS / "og-image.png")
+
+
+def ASSETS_wordmark_light():
+    svg = (ASSETS / "noldor-wordmark.svg").read_text(encoding="utf-8")
+    return svg.replace('fill="currentColor"', 'fill="#ece8e1"')
+
+
 def main():
     ASSETS.mkdir(exist_ok=True)
     WORK.mkdir(exist_ok=True)
@@ -174,6 +245,9 @@ def main():
         canvas.alpha_composite(glyph, ((size - glyph.width) // 2,
                                        (size - glyph.height) // 2))
         canvas.save(ASSETS / name)
+
+    # ---- Open Graph / social card (1200x630) --------------------------
+    build_og_image(light_svg, cairosvg)
 
     print("Wrote:")
     for p in sorted(ASSETS.iterdir()):

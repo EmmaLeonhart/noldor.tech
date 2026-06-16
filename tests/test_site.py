@@ -88,6 +88,19 @@ def test_app_icons_are_opaque():
         assert alpha[0] == 255, f"{name} has transparency (min alpha {alpha[0]})"
 
 
+def test_og_image_is_landscape_card():
+    """The social card must be a 1200x630 opaque PNG, referenced by index.html."""
+    from PIL import Image
+    p = ASSETS / "og-image.png"
+    assert p.exists(), "missing og-image.png"
+    im = Image.open(p)
+    assert im.size == (1200, 630), f"og-image.png is {im.size}, want (1200, 630)"
+    assert im.convert("RGBA").getchannel("A").getextrema()[0] == 255, "og-image not opaque"
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    assert "assets/og-image.png" in html
+    assert 'name="twitter:card"' in html
+
+
 def test_index_html_has_tagline():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "Vector symbolic architecture" in html

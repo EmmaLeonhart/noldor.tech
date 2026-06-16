@@ -23,10 +23,6 @@ a time as they become unblocked. See `CLAUDE.md` § "Queue and longer-horizon wo
 
 ## Logo polish
 
-- **Theme-aware favicon.** The brand mark `noldor-mark.svg` is dark `#2b2b2b`,
-  so it's low-contrast on dark browser chrome / dark social cards. Add a
-  dual-tone or `prefers-color-scheme` favicon (and consider a branded background
-  for the OG `icon-512`).
 - **Maybe use the mark in the topbar.** Currently the topbar brand is the text
   "Noldor"; the *Ñol* mark could replace/accompany it.
 - **Possible exact-Telcontar wordmark.** Current wordmark is a faithful trace of
