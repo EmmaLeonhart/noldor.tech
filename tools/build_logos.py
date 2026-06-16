@@ -140,25 +140,40 @@ def main():
     # Drop the older single-tengwa monogram if present (superseded by the mark).
     (ASSETS / "noldor-letter.svg").unlink(missing_ok=True)
 
-    # Favicons from the brand mark. The mark is wider than tall, so render at
-    # natural aspect and letterbox onto a square transparent canvas (no squash).
+    # ---- Favicons -----------------------------------------------------
+    # Identity colours: dark glyph on light chrome, light glyph on dark.
+    INK_DARK = "#2b2b2b"      # glyph on a light background
+    INK_LIGHT = "#ece8e1"     # glyph on a dark background
+    BG_NAVY = (12, 12, 20)    # --bg-soft #0c0c14, opaque app-icon background
     import cairosvg
     mark_svg = (ASSETS / "noldor-mark.svg").read_text(encoding="utf-8")
-    raster_svg = mark_svg.replace('fill="currentColor"', 'fill="#2b2b2b"')
+
+    # SVG favicon — theme-aware. currentColor follows the `color` property, which
+    # a prefers-color-scheme media query flips, so the glyph stays legible on
+    # both light and dark browser chrome.
+    style = ("<style>svg{color:%s}"
+             "@media (prefers-color-scheme: dark){svg{color:%s}}</style>"
+             % (INK_DARK, INK_LIGHT))
+    favicon_svg = re.sub(r"(<svg\b[^>]*>)", r"\1" + style, mark_svg, count=1)
+    (ASSETS / "favicon.svg").write_text(favicon_svg, encoding="utf-8")
+
+    # Raster app icons — light mark on an OPAQUE deep-navy square, letterboxed
+    # with an inset margin (the mark is wider than tall; no squash). Opaque so
+    # they read on any background, and so iOS doesn't fill transparency black.
+    light_svg = mark_svg.replace('fill="currentColor"', f'fill="{INK_LIGHT}"')
     for size, name in [(32, "favicon-32.png"), (180, "apple-touch-icon.png"),
                        (512, "icon-512.png")]:
-        png = cairosvg.svg2png(bytestring=raster_svg.encode(),
+        png = cairosvg.svg2png(bytestring=light_svg.encode(),
                                output_width=size * 2)  # 2x then fit, for crispness
         glyph = Image.open(io.BytesIO(png)).convert("RGBA")
-        scale = min(size / glyph.width, size / glyph.height)
+        inner = size * 0.78  # inset margin
+        scale = min(inner / glyph.width, inner / glyph.height)
         glyph = glyph.resize((max(1, round(glyph.width * scale)),
                               max(1, round(glyph.height * scale))), Image.LANCZOS)
-        canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+        canvas = Image.new("RGBA", (size, size), (*BG_NAVY, 255))
         canvas.alpha_composite(glyph, ((size - glyph.width) // 2,
                                        (size - glyph.height) // 2))
         canvas.save(ASSETS / name)
-    # SVG favicon (recolored dark so it shows on light tabs)
-    (ASSETS / "favicon.svg").write_text(raster_svg, encoding="utf-8")
 
     print("Wrote:")
     for p in sorted(ASSETS.iterdir()):
