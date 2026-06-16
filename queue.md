@@ -57,6 +57,10 @@ The repo C:\Users\Immanuelle\Documents\Github\emmas-gstack Has a bit of explanat
 
 Especially the sign-up form for Yantra probably should be preserved here. 
 
+This repository here does not contain the actual operating system or any substantial products. It does not contain the operating system or any substantial products; however, there is the subdomain we will add https://sutra.noldor.tech which is tightly coupled. 
+
+I am going to write an additional notes.md file in the data lake that will have additional instructions. As this thing is the last part of the queue, all of the stuff done above this here, including the created tasks come before this section. The notes.md is something that is to be read and used at the very end for additional todo and queue stuff after the other things are done.
+
 ---
 
 ## Always last — restart the three crons and summarize
