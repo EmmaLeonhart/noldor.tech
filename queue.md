@@ -53,6 +53,8 @@ These items are the default opening sequence for a new cleanvibe project. Work t
 
 After you have finished up the initial landing page that you are working on, I would like you to move on to doing other stuff. 
 
+So to be clear this is supposed to be a public github repo with the pages built from github actions and the url of https://noldor.tech I think that you kind of need to do a lot of this stuff early, because it can make it a bit confusing if you don't do it at that point.  So I think that you kind of need to do a lot of this stuff early because it, at least, can make it a bit confusing if you don't do it at that point. We need this to work with https 
+
 The repo C:\Users\Immanuelle\Documents\Github\emmas-gstack Has a bit of explanation of the stuff that we are doing as a company in it, and you could use it. And same with C:\Users\Immanuelle\Documents\Github\Yantra
 
 Especially the sign-up form for Yantra probably should be preserved here. 
