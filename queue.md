@@ -48,6 +48,15 @@ These items are the default opening sequence for a new cleanvibe project. Work t
 
 8. **Work the queue until the stop condition.** Pull the top item, do it, **delete it from `queue.md` AND append a dated entry to `devlog.md`** in the same commit as the work, push, let CI run. When `queue.md` empties, refill from `todo.md` by decomposing the next item. New ideas that surface mid-work go to the bottom of the queue (or to `todo.md` if they're longer-horizon), not into the currently-in-flight task. **Stop** when: `queue.md` is empty, the items still in `todo.md` are too abstract to break down further without more user input, and the repository is online with green CI. At that point, hand back to the user.
 
+
+## Later stuff to do
+
+After you have finished up the initial landing page that you are working on, I would like you to move on to doing other stuff. 
+
+The repo C:\Users\Immanuelle\Documents\Github\emmas-gstack Has a bit of explanation of the stuff that we are doing as a company in it, and you could use it. And same with C:\Users\Immanuelle\Documents\Github\Yantra
+
+Especially the sign-up form for Yantra probably should be preserved here. 
+
 ---
 
 ## Always last — restart the three crons and summarize
