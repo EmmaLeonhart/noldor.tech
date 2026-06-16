@@ -78,3 +78,14 @@ Quenya-mode render).
   3pm-Pacific data-lake cron, monogram variant). Most are blocked on user input.
 
 **First-pass milestone:** Noldor Technologies logo + landing site is live.
+
+## 2026-06-16 — Yantra → Noldor redirect cutover prepared
+
+- **Yantra side (PR, not yet live):** `EmmaLeonhart/Yantra#1` replaces the
+  `yantraos.org` landing page with a path-preserving JS redirect
+  (`site/index.html` + `site/404.html`) → `noldor.tech/<path>`. CNAME stays on
+  the Yantra repo; merging the PR makes the redirect live (pages.yml deploys).
+- **Data lake:** `data_lake/yantra-sitemap.{json,md}` — inventory of the one
+  live yantraos.org page (single-page site) + the cutover target/PR.
+- **Cutover automation:** local cron at 3pm Pacific (session job 240b264c)
+  reads the sitemap and, on/after 2026-06-18, merges Yantra PR #1.
