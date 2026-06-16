@@ -1,0 +1,3 @@
+# Test dependencies (CI installs these to run the suite).
+pytest
+pillow
