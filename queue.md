@@ -12,12 +12,12 @@ Spec for the current work: `docs/superpowers/specs/2026-06-16-noldor-logo-site-d
 
 ---
 
-## Active — Noldor logo + landing site (first pass)
+## Active
 
-6. **GitHub Pages via Actions + custom domain.** Create the public repo
-   **noldor.tech**, push `main`, confirm CI + the Pages deploy workflow are
-   green, and that the custom domain serves. (Site files, `CNAME`, and both
-   workflows are already committed.)
+_First-pass logo + landing site is done and deployed. Next work pulls from
+`todo.md` (Yantra style/redirects, fuller site) — most of it is blocked on user
+input (Yantra repo URL, the page-list/sitemap), so the queue is intentionally
+empty pending those._
 
 ---
 
