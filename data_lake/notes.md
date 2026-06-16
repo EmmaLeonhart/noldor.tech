@@ -1,0 +1,1 @@
+So yeah, I would be interested in potentially building up this site a bit in some ways, but I'm not really like the most absolutely committed to lore right now. This site definitely should be more on the practical side of explaining what it is that we do and what we are doing. 
