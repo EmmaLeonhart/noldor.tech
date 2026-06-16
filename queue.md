@@ -13,11 +13,6 @@ alive and signs off. Work items run top to bottom.
 
 ## Active — Visual identity + content (decomposed from `data_lake/notes.md`)
 
-1. **Fix "analogue" → "analog" across the site.** User correction: it's *analog*,
-   not *analogue*. Update `index.html` (meta description, OG description,
-   tagline), `README.md`, and any other shipped copy / docs. Redeploy and
-   verify the live site shows "analog".
-
 2. **Vendor Yantra's canonical `identity.css`.** Copy
    `EmmaLeonhart/Yantra:site/identity.css` — the explicitly *shared* visual
    identity (dark default + light toggle, periwinkle `--accent`, Instrument
