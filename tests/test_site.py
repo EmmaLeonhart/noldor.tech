@@ -106,6 +106,23 @@ def test_index_html_has_tagline():
     assert "Vector symbolic architecture" in html
 
 
+def test_404_page_on_shared_identity():
+    """GitHub Pages serves /404.html for unknown paths; it must be branded."""
+    p = ROOT / "404.html"
+    assert p.exists(), "missing 404.html"
+    html = p.read_text(encoding="utf-8")
+    assert 'href="identity.css"' in html      # shares the identity
+    assert 'href="/"' in html                 # link back home
+    assert '<svg class="wordmark"' in html    # the brand mark
+    assert 'data-theme="dark"' in html
+
+
+def test_404_in_deploy_artifact():
+    """The deploy workflow must copy 404.html into the published site."""
+    wf = (ROOT / ".github" / "workflows" / "deploy.yml").read_text(encoding="utf-8")
+    assert "404.html" in wf
+
+
 def test_cname_is_custom_domain():
     cname = (ROOT / "CNAME").read_text(encoding="utf-8").strip()
     assert cname == "noldor.tech"
