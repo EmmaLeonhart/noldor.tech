@@ -188,3 +188,13 @@ land on noldor.tech paths that don't exist here; `notes.md` asked for at least
 - Added `404.html` to the deploy artifact (`deploy.yml`).
 - Tests: `test_404_page_on_shared_identity` + `test_404_in_deploy_artifact`.
   **16 passing.**
+
+## 2026-06-17 — SEO: robots.txt + sitemap.xml
+
+Work-loop item. Also verified the vendored `identity.css` / `celestial.css` are
+still byte-identical to upstream Yantra (no drift).
+
+- Added `robots.txt` (allow all, points to the sitemap) and `sitemap.xml`
+  (lists `https://noldor.tech/`); both added to the deploy artifact.
+- Tests: robots→sitemap reference, sitemap well-formedness + homepage `loc`,
+  deploy inclusion. **19 passing.**

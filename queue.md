@@ -13,9 +13,10 @@ alive and signs off. Work items run top to bottom.
 
 ## Active
 
-_Empty. Next work pulls from `todo.md` (mark-in-topbar is a taste decision left
-for the user; grow-the-site needs product direction; exact-Telcontar is blocked
-on tooling)._
+_Empty. Autonomously-safe work is essentially drained. Remaining `todo.md` items
+need a user decision (topbar mark), product direction (grow the site), or
+missing tooling (exact-Telcontar). Next tick will likely report `nothing
+actionable` absent new direction._
 
 ---
 

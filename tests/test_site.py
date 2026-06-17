@@ -123,6 +123,29 @@ def test_404_in_deploy_artifact():
     assert "404.html" in wf
 
 
+def test_robots_txt_points_to_sitemap():
+    p = ROOT / "robots.txt"
+    assert p.exists(), "missing robots.txt"
+    text = p.read_text(encoding="utf-8")
+    assert "User-agent: *" in text
+    assert "Sitemap: https://noldor.tech/sitemap.xml" in text
+
+
+def test_sitemap_is_well_formed():
+    p = ROOT / "sitemap.xml"
+    assert p.exists(), "missing sitemap.xml"
+    root = ET.parse(p).getroot()  # raises on malformed XML
+    ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+    assert root.tag == f"{ns}urlset"
+    locs = [e.text for e in root.iter(f"{ns}loc")]
+    assert "https://noldor.tech/" in locs
+
+
+def test_seo_files_in_deploy_artifact():
+    wf = (ROOT / ".github" / "workflows" / "deploy.yml").read_text(encoding="utf-8")
+    assert "robots.txt" in wf and "sitemap.xml" in wf
+
+
 def test_cname_is_custom_domain():
     cname = (ROOT / "CNAME").read_text(encoding="utf-8").strip()
     assert cname == "noldor.tech"
