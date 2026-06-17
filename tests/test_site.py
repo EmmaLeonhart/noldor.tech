@@ -54,24 +54,18 @@ def test_index_html_references_assets():
     assert "assets/favicon.svg" in html
     assert "assets/favicon-32.png" in html
     assert "assets/apple-touch-icon.png" in html
-    # links its stylesheets, including the shared identity layers
+    # links its stylesheet
     assert 'href="styles.css"' in html
-    assert 'href="identity.css"' in html
-    assert 'href="celestial.css"' in html
 
 
-def test_shared_identity_files_present():
-    """The vendored canonical identity + celestial layers must ship."""
-    for name in ["identity.css", "celestial.css"]:
-        p = ROOT / name
-        assert p.exists(), f"missing {name}"
-        assert p.stat().st_size > 1000, f"{name} too small"
-
-
-def test_index_has_theme_toggle_dark_default():
-    html = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert 'data-theme="dark"' in html  # dark default on <html>
-    assert 'id="theme-toggle"' in html  # toggle control present
+def test_no_celestial_identity_theme():
+    """The garish celestial/identity theme was reverted — it must not return."""
+    assert not (ROOT / "identity.css").exists(), "identity.css should be removed"
+    assert not (ROOT / "celestial.css").exists(), "celestial.css should be removed"
+    for page in ["index.html", "404.html"]:
+        html = (ROOT / page).read_text(encoding="utf-8")
+        assert "identity.css" not in html, f"{page} still links identity.css"
+        assert "celestial.css" not in html, f"{page} still links celestial.css"
 
 
 def test_favicon_svg_is_theme_aware():
@@ -88,33 +82,19 @@ def test_app_icons_are_opaque():
         assert alpha[0] == 255, f"{name} has transparency (min alpha {alpha[0]})"
 
 
-def test_og_image_is_landscape_card():
-    """The social card must be a 1200x630 opaque PNG, referenced by index.html."""
-    from PIL import Image
-    p = ASSETS / "og-image.png"
-    assert p.exists(), "missing og-image.png"
-    im = Image.open(p)
-    assert im.size == (1200, 630), f"og-image.png is {im.size}, want (1200, 630)"
-    assert im.convert("RGBA").getchannel("A").getextrema()[0] == 255, "og-image not opaque"
-    html = (ROOT / "index.html").read_text(encoding="utf-8")
-    assert "assets/og-image.png" in html
-    assert 'name="twitter:card"' in html
-
-
 def test_index_html_has_tagline():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "Vector symbolic architecture" in html
 
 
-def test_404_page_on_shared_identity():
+def test_404_page_branded():
     """GitHub Pages serves /404.html for unknown paths; it must be branded."""
     p = ROOT / "404.html"
     assert p.exists(), "missing 404.html"
     html = p.read_text(encoding="utf-8")
-    assert 'href="identity.css"' in html      # shares the identity
+    assert 'href="styles.css"' in html        # uses the shared page style
     assert 'href="/"' in html                 # link back home
-    assert '<svg class="wordmark"' in html    # the brand mark
-    assert 'data-theme="dark"' in html
+    assert '<svg class="wordmark"' in html    # the wordmark
 
 
 def test_404_in_deploy_artifact():

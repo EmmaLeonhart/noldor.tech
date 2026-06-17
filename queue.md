@@ -13,10 +13,11 @@ alive and signs off. Work items run top to bottom.
 
 ## Active
 
-_Empty. Autonomously-safe work is essentially drained. Remaining `todo.md` items
-need a user decision (topbar mark), product direction (grow the site), or
-missing tooling (exact-Telcontar). Next tick will likely report `nothing
-actionable` absent new direction._
+_Empty. Site reverted to the clean minimal landing (2026-06-17). Remaining
+`todo.md` items need product direction (grow the site) or missing tooling
+(exact-Telcontar). Next tick will likely report `nothing actionable` absent new
+direction. Do NOT re-introduce the celestial/identity theme — it was reverted as
+too garish._
 
 ---
 

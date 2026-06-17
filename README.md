@@ -10,7 +10,9 @@ The site is a static page deployed to **GitHub Pages** at
 
 ```
 index.html              # landing page (wordmark inlined for currentColor theming)
+404.html                # branded not-found page (served by Pages for unknown paths)
 styles.css              # styling, light + dark via prefers-color-scheme
+robots.txt, sitemap.xml # SEO
 CNAME                   # custom domain (noldor.tech)
 assets/
   noldor-wordmark.svg   # full "Ñoldor" tengwar wordmark (Quenya mode)
@@ -39,7 +41,7 @@ python tools/build_logos.py
 ## Development
 
 ```
-python -m pip install pytest
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
