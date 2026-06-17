@@ -18,13 +18,14 @@ Assets: `/identity.css`, `/celestial.css`.
 ## Rebrand cutover
 
 - **To:** https://noldor.tech
-- **How:** path-preserving JS redirect — `site/index.html` + `site/404.html`
+- **How:** path-preserving JS redirect — `redirect/index.html` + `redirect/404.html`
   forward `yantraos.org/<path>` → `noldor.tech/<path>`, so nothing 404s even
   for paths that never existed.
-- **Target:** 2026-06-18, 3pm Pacific.
-- **Yantra PR (prepared, not yet merged):** https://github.com/EmmaLeonhart/Yantra/pull/1
-- A local cron checks this data lake at 3pm Pacific; once this sitemap is
-  present and the date has arrived, it merges the PR to make the redirect live.
+- **Cutover date:** 2026-06-18.
+- **Mechanism (time-based):** `.github/workflows/pages.yml` runs on a daily
+  schedule and checks the date — it deploys `site/` (normal page) before the
+  cutover and `redirect/` on or after it. No PR merge, no session cron. (The
+  earlier PR #1 + 3pm local cron were superseded 2026-06-16.)
 
 ## Decision notes
 

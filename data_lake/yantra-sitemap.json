@@ -4,9 +4,9 @@
   "captured_from": "EmmaLeonhart/Yantra repo, site/ (the only directory deployed to yantraos.org via .github/workflows/pages.yml)",
   "rebrand": {
     "to": "https://noldor.tech",
-    "method": "path-preserving JS redirect (site/index.html + site/404.html) — yantraos.org/<path> -> noldor.tech/<path>",
-    "cutover_target": "2026-06-18T15:00:00-07:00",
-    "yantra_pr": "https://github.com/EmmaLeonhart/Yantra/pull/1"
+    "method": "path-preserving JS redirect (redirect/index.html + redirect/404.html) — yantraos.org/<path> -> noldor.tech/<path>",
+    "cutover_date": "2026-06-18",
+    "mechanism": "TIME-BASED in .github/workflows/pages.yml: a daily-scheduled build deploys site/ before the cutover date and redirect/ on or after it. No PR merge, no session cron. (The earlier PR #1 + 3pm local cron were superseded 2026-06-16.)"
   },
   "note": "yantraos.org is a single-page landing site. The 'pages' below are everything actually served at the apex domain; in-page section anchors are part of '/' (not separate URLs). After cutover every path 301-equivalents to the same path on noldor.tech, so nothing 404s.",
   "pages": [
