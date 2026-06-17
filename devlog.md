@@ -174,3 +174,17 @@ Work-loop item pulled from `todo.md`.
 - Test `test_og_image_is_landscape_card` (exists, 1200×630, opaque, referenced).
   **14 passing.** Removed the now-done theme-aware-favicon / OG-bg note from
   `todo.md`.
+
+## 2026-06-16 — Branded 404 page
+
+Work-loop item (the Yantra→Noldor redirect preserves paths, so inbound links
+land on noldor.tech paths that don't exist here; `notes.md` asked for at least
+"something… just to be safe").
+
+- Added `404.html` on the shared identity (links `identity.css` + `celestial.css`,
+  dark default + theme toggle + aurora), with the inlined wordmark, a
+  "404 — page not found" line, and a `.btn-primary` link home. GitHub Pages
+  serves it automatically for unknown paths. Verified rendering via Playwright.
+- Added `404.html` to the deploy artifact (`deploy.yml`).
+- Tests: `test_404_page_on_shared_identity` + `test_404_in_deploy_artifact`.
+  **16 passing.**
