@@ -198,3 +198,26 @@ still byte-identical to upstream Yantra (no drift).
   (lists `https://noldor.tech/`); both added to the deploy artifact.
 - Tests: robots→sitemap reference, sitemap well-formedness + homepage `loc`,
   deploy inclusion. **19 passing.**
+
+## 2026-06-17 — Reverted the celestial/identity theme (too garish)
+
+User feedback: the shared dark/celestial identity theming was too garish; go
+back to the earlier clean look. Full revert (their choice):
+
+- Restored `index.html` + `styles.css` to the earlier minimal landing
+  (commit `ae7e73c`): warm off-white, dark wordmark, "NOLDOR TECHNOLOGIES",
+  one-line tagline, single deep-violet hairline, footer; light/dark via
+  `prefers-color-scheme`. Dropped the dark-default, theme toggle, celestial
+  starfield/glow, and the added content sections.
+- Removed `identity.css`, `celestial.css`, and `assets/og-image.png` (the dark
+  social card). Re-skinned `404.html` to the clean minimal style (links
+  `styles.css`, no identity/celestial).
+- `tools/build_logos.py`: dropped OG-image generation; keeps wordmark, the
+  "Ñol" mark, and favicons. `deploy.yml`: stopped shipping identity/celestial.
+- Kept (separate from the page theme, not part of the complaint): the Option-B
+  "Ñol" brand mark + theme-aware favicon + SEO files (`robots.txt`,
+  `sitemap.xml`).
+- Tests updated: added `test_no_celestial_identity_theme` (regression guard that
+  the theme can't silently return); removed identity/toggle/og-image tests;
+  re-pointed the 404 test. **17 passing.** Verified the reverted page renders the
+  clean look (Playwright).

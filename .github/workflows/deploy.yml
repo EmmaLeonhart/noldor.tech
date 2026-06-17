@@ -23,7 +23,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site/assets
-          cp index.html 404.html styles.css identity.css celestial.css CNAME _site/
+          cp index.html 404.html styles.css CNAME _site/
           cp robots.txt sitemap.xml _site/
           cp -r assets/. _site/assets/
       - uses: actions/configure-pages@v5
