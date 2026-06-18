@@ -11,13 +11,13 @@ alive and signs off. Work items run top to bottom.
 
 ---
 
-## Active
+## Active — awaiting user feedback
 
-_Empty. Site reverted to the clean minimal landing (2026-06-17). Remaining
-`todo.md` items need product direction (grow the site) or missing tooling
-(exact-Telcontar). Next tick will likely report `nothing actionable` absent new
-direction. Do NOT re-introduce the celestial/identity theme — it was reverted as
-too garish._
+_Explainer sections ("What we do / Why analog & edge / Sutra") are deployed to
+the live site for review (user reviews on `noldor.tech`, not branch previews).
+Awaiting their feedback — edit or revert on their word (proven revert path). Open
+question raised: is framing Sutra as Noldor's "software layer" correct, or should
+it read as a separate/sister project?_
 
 ---
 
