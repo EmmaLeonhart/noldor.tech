@@ -238,3 +238,21 @@ Process note: first parked the draft on a `content-draft` branch (not deployed)
 pending sign-off; the user reviews on the live site, so merged to `main` to
 deploy for review. Iterate/revert on their feedback (the revert path is proven).
 Open question flagged to the user: Sutra-as-"software-layer" framing.
+
+## 2026-06-17 — Explainer copy rewritten for a general audience
+
+User: the explainer sections were too specialized; aim at general people.
+Rewrote all three in plain language, no jargon dump (dropped "vector symbolic
+architecture (VSA)", "matrix multiplication", "dot products", "softmax-weighted
+sums", "iterated rotations"):
+
+- **What we do** — Noldor makes advanced AI run directly on small low-power
+  devices instead of a distant data center; information becomes patterns of
+  numbers and reasoning reduces to one simple piece of arithmetic, repeated.
+- **Why it matters** (renamed from "Why analog & edge") — that one operation is
+  what ultra-efficient chips, including analog hardware, do fast at low power; so
+  work happens on-device, real-time, private, no constant connection.
+- **Sutra** — neutralized to "our work is built on Sutra" (pending the user's
+  ownership-framing decision).
+
+Tagline unchanged (brand line). 17 tests still pass. Deployed for live review.
