@@ -13,11 +13,11 @@ alive and signs off. Work items run top to bottom.
 
 ## Active — awaiting user feedback
 
-_Explainer sections ("What we do / Why analog & edge / Sutra") are deployed to
-the live site for review (user reviews on `noldor.tech`, not branch previews).
-Awaiting their feedback — edit or revert on their word (proven revert path). Open
-question raised: is framing Sutra as Noldor's "software layer" correct, or should
-it read as a separate/sister project?_
+_Explainer sections deployed to the live site for review (user reviews on
+`noldor.tech`). Rewritten 2026-06-17 in plain, general-audience language at the
+user's request (less specialized). Awaiting feedback — edit/revert on their word.
+The Sutra section now reads neutrally ("our work is built on Sutra") rather than
+claiming it as Noldor's own layer, pending the user's framing decision._
 
 ---
 
