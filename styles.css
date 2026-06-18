@@ -36,15 +36,66 @@ body {
 }
 
 .hero {
-  flex: 1;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: clamp(1.25rem, 4vw, 2.25rem);
-  padding: 2rem 1.5rem;
+  padding: 3rem 1.5rem 2rem;
   text-align: center;
 }
+
+/* Content sections below the hero */
+.content {
+  width: 100%;
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.content section {
+  padding: 2.75rem 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.content h2 {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.content p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.content p:last-child { margin-bottom: 0; }
+.content p strong { color: var(--ink); font-weight: 600; }
+
+.content .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.content .links a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.content .links a:hover { border-color: var(--accent); }
 
 /* The tengwar wordmark. currentColor lets it follow the theme. */
 .wordmark {

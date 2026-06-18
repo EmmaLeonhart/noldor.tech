@@ -21,9 +21,8 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="hero">
+  <header class="hero">
     <h1 class="visually-hidden">Noldor Technologies</h1>
-
     <svg class="wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1764 756" fill="currentColor" role="img" aria-label="Ñoldor">
   <title>Ñoldor</title>
   <g transform="translate(0.000000,756.000000) scale(0.100000,-0.100000)">
@@ -147,10 +146,31 @@
 156 -439 246 -697 257 -58 2 -130 1 -160 -3z"/>
   </g>
 </svg>
-
     <p class="company">Noldor&nbsp;Technologies</p>
-
     <p class="tagline">Vector symbolic architecture for analog hardware and edge&nbsp;AI.</p>
+  </header>
+
+  <main class="content">
+    <section>
+      <h2>What we do</h2>
+      <p>Modern AI computes geometrically. A trained model doesn't answer by walking a graph of neurons — at inference it works on <strong>points in a high-dimensional space</strong>, where every operation is linear algebra: dot products, additions, matrix multiplications.</p>
+      <p><strong>Vector symbolic architecture (VSA)</strong> brings structured, symbolic computation into that same space. Keys bound to values, items bundled into sets, records, relations, and comparison by similarity — each one is a vector operation. Binding is a matrix multiply, bundling is an addition, similarity is a dot product.</p>
+    </section>
+
+    <section>
+      <h2>Why analog &amp; edge</h2>
+      <p>Because the whole computation reduces to dense matrix multiplication, it maps onto the hardware that does matrix multiplication most efficiently — <strong>analog in-memory compute</strong> and edge accelerators.</p>
+      <p>That lets symbolic and neural computation run together, close to where signals are sensed: low power, low latency, no round trip to a datacenter. Capable computation at the edge, on hardware that is already good at the one operation everything reduces to.</p>
+    </section>
+
+    <section>
+      <h2>Sutra</h2>
+      <p>The software layer is <strong>Sutra</strong>, a geometrically compiled language. Programs over vectors compile — ahead of runtime — into a single chain of matrix multiplications: branches become softmax-weighted sums, loops become iterated rotations, structured records become bind/bundle expressions.</p>
+      <p class="links">
+        <a href="https://sutra.noldor.tech">Explore Sutra &rarr;</a>
+        <a href="https://github.com/EmmaLeonhart/noldor.tech">GitHub &rarr;</a>
+      </p>
+    </section>
   </main>
 
   <footer class="footer">

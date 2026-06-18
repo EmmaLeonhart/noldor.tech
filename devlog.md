@@ -221,3 +221,20 @@ back to the earlier clean look. Full revert (their choice):
   the theme can't silently return); removed identity/toggle/og-image tests;
   re-pointed the 404 test. **17 passing.** Verified the reverted page renders the
   clean look (Playwright).
+
+## 2026-06-17 — Site explainer content ("what we do") — deployed for review
+
+User asked for info on the site explaining what Noldor does. Drafted three
+short sections in the clean minimal style (no celestial), grounded in the user's
+own Sutra docs (`what-is-sutra.md`, `vision.md`) — no invented specifics:
+
+- **What we do** — computation is geometric; VSA puts symbolic/structured
+  computation in vector space where bind/bundle/similarity are matmul/add/dot.
+- **Why analog & edge** — it all reduces to matrix multiplication, which analog
+  in-memory + edge accelerators run cheaply → computation near the data.
+- **Sutra** — the geometrically compiled language; links `sutra.noldor.tech`.
+
+Process note: first parked the draft on a `content-draft` branch (not deployed)
+pending sign-off; the user reviews on the live site, so merged to `main` to
+deploy for review. Iterate/revert on their feedback (the revert path is proven).
+Open question flagged to the user: Sutra-as-"software-layer" framing.
