@@ -20,12 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble site
+      - name: Assemble redirect site
         run: |
-          mkdir -p _site/assets
-          cp index.html 404.html styles.css CNAME _site/
-          cp robots.txt sitemap.xml _site/
-          cp -r assets/. _site/assets/
+          mkdir -p _site
+          cp index.html 404.html CNAME _site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

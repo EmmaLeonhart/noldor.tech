@@ -256,3 +256,17 @@ sums", "iterated rotations"):
   ownership-framing decision).
 
 Tagline unchanged (brand line). 17 tests still pass. Deployed for live review.
+
+## 2026-06-18 — noldor.tech → topazcomputing.com redirect prepared (branch, not yet merged)
+
+topazcomputing.com is the new main domain. Prepared the cutover on branch
+`redirect-to-topaz` (NOT merged, so noldor.tech stays live until topaz is up):
+
+- `index.html` + `404.html` replaced with a path-preserving JS redirect to
+  `https://topazcomputing.com` (preserves path, query, hash; `noindex`).
+- `deploy.yml` simplified to ship only `index.html` + `404.html` + `CNAME`
+  (CNAME stays `noldor.tech`).
+- `tests/test_site.py` rewritten to guard the redirect (5 tests).
+- Merge to `main` once `topazcomputing.com` is live (repo created + Pages +
+  Emma's DNS), mirroring the Yantra→Noldor cutover pattern. The old subdomain
+  `sutra.noldor.tech` is handled by the separate `sutra.noldor.tech-redirect` repo.
