@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  schedule:
+    # Date-gated cutover: re-runs 4x/day so the redirect flips on automatically
+    # on/after the CUTOVER date below without anyone touching the repo.
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:
@@ -20,12 +24,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble site
+      - name: Assemble site (date-gated cutover to topazcomputing.com)
+        shell: bash
         run: |
-          mkdir -p _site/assets
-          cp index.html 404.html styles.css CNAME _site/
-          cp robots.txt sitemap.xml _site/
-          cp -r assets/. _site/assets/
+          mkdir -p _site
+          CUTOVER="2026-06-20"
+          TODAY="$(date -u +%F)"
+          if [[ "$TODAY" > "$CUTOVER" || "$TODAY" == "$CUTOVER" ]]; then
+            echo "Cutover ACTIVE ($TODAY >= $CUTOVER): serving redirect to topazcomputing.com"
+            cp redirect/index.html _site/index.html
+            cp redirect/404.html  _site/404.html
+            cp CNAME _site/
+          else
+            echo "Pre-cutover ($TODAY < $CUTOVER): serving the Noldor landing"
+            cp index.html 404.html styles.css CNAME _site/
+            cp robots.txt sitemap.xml _site/
+            cp -r assets/. _site/assets/
+          fi
       - uses: actions/configure-pages@v5
         with:
           enablement: true
